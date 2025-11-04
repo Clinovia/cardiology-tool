@@ -1,0 +1,10 @@
+torch
+torchvision
+torchaudio
+gradio
+pandas
+numpy
+scikit-learn
+matplotlib
+av
+boto3
