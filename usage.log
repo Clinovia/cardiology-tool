@@ -1,0 +1,8 @@
+2025-11-05 17:31:44,335 | HTTP Request: GET http://127.0.0.1:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
+2025-11-05 17:31:44,343 | HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2025-11-05 17:31:44,506 | HTTP Request: HEAD https://huggingface.co/api/telemetry/https%3A/api.gradio.app/gradio-initiated-analytics "HTTP/1.1 200 OK"
+2025-11-05 17:31:44,855 | HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-11-05 17:31:44,955 | HTTP Request: GET https://api.gradio.app/v3/tunnel-request "HTTP/1.1 200 OK"
+2025-11-05 17:31:45,918 | HTTP Request: HEAD https://huggingface.co/api/telemetry/https%3A/api.gradio.app/gradio-launched-telemetry "HTTP/1.1 200 OK"
+2025-11-05 17:33:30,341 | session=d29a6b19 tool=echonet_ef inputs={'patient_id': ''} outputs=Predicted Ejection Fraction (EF): 49.9%
+Category: Mildly Reduced (45–54%) ⚠️

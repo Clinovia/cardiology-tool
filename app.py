@@ -7,6 +7,7 @@ import logging
 import uuid
 import requests
 from io import BytesIO
+from video_converter import convert_to_avi
 
 from calculators.ascvd import ascvd
 from calculators.bp_category import bp_category
@@ -26,7 +27,34 @@ from validators.patient_input import (
 from model import EF3DCNN
 
 # -----------------------------
-# Logger setup
+# Logger setupfrom video_converter import convert_to_avi
+
+
+def run_echonet_ef(video_path, patient_id="N/A"):
+    if ef_model is None:
+        return "❌ EF model not loaded."
+
+    try:
+        video_path = convert_to_avi(video_path.name)  # Convert any upload to .avi
+        video_tensor = preprocess_video(video_path)
+        with torch.no_grad():
+            ef_pred = ef_model(video_tensor.to(device)).item()
+        ef_pred = max(0, min(100, ef_pred))
+
+        category = (
+            "Normal (≥55%) ✅" if ef_pred >= 55 else
+            "Mildly Reduced (45–54%) ⚠️" if ef_pred >= 45 else
+            "Moderately Reduced (30–44%) ❗️" if ef_pred >= 30 else
+            "Severely Reduced (<30%) 🚨"
+        )
+        result_full = f"Predicted EF: {ef_pred:.1f}%\nCategory: {category}"
+        log_usage("echonet_ef", {"patient_id": patient_id}, result_full)
+        return result_full
+    except Exception as e:
+        log_usage("echonet_ef", {"error": str(e)}, "Error")
+        return f"❌ Error processing video: {str(e)}"
+
+
 # -----------------------------
 logging.basicConfig(
     filename="usage.log",
